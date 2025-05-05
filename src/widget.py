@@ -13,3 +13,12 @@ def mask_account_card(number_type: str) -> str:
 
 number_type = input()
 print(mask_account_card(number_type))
+
+
+def get_date(date: str) -> str:
+    """Функция принимает строку с датой и возвращает дату в другом формате"""
+    return f"{date[9:11]}.{date[6:8]}.{date[1:5]}"
+
+
+date = input()
+print(get_date(date))
