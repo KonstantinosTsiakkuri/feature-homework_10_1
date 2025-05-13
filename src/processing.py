@@ -1,9 +1,9 @@
 def filter_by_state(dict_list: list[dict], state: str = "EXECUTED") -> list[dict]:
     """Функция принимает список словарей и возвращает новый список, у которых ключ соответствует указанному значению"""
     new_dict_list = []
-    for dictianory in dict_list:
-        if dictianory["state"] == state:
-            new_dict_list.append(dictianory)
+    for dictionary in dict_list:
+        if dictionary["state"] == state:
+            new_dict_list.append(dictionary)
     return new_dict_list
 
 
@@ -19,7 +19,7 @@ print(filter_by_state(dict_list, state))
 
 def sort_by_date(dict_list: list[dict], reverse: bool = True) -> list[dict]:
     """Функция, которая принимает список словарей и возвращает новый список, отсортированный по дате"""
-    new_dict = sorted(dict_list, key=lambda x: x["date"], reverse=True)
+    new_dict = sorted(dict_list, key=lambda x: x["date"], reverse=reverse)
     return new_dict
 
 
