@@ -1,24 +1,36 @@
-def mask_account_card(number_type: str) -> str:
+import re
+from typing import Dict, List, Union
+
+
+def mask_account_card(number_type: str) -> Union[List[Dict], str]:
     """Функция принимает тип и номер карты или счета и возвращает строку с замаскированным номером"""
-    if "Счет" in number_type:
-        number_mask = "**" + number_type[-4:]
-        return f"Счет {number_mask}"
-    else:
-        number_type_splited = number_type.split()
-        card_type_sep = " ".join(number_type_splited[:-1])
-        card_number_sep = number_type_splited[-1]
-        number_mask = "" + card_number_sep[0:4] + " " + card_number_sep[4:6] + "** **** " + card_number_sep[-4:]
-        return f"{card_type_sep} {number_mask}"
+    if not any(char.isdigit() for char in number_type):
+        return "Некорректный ввод данных"
+    if "Счет" in number_type or "счет" in number_type:
+        number_type_cleaned = number_type.replace("-", "").replace(" ", "")
+        account_mask = "**" + number_type_cleaned[-4:]
+        return f"Счет {account_mask}"
+    number_type_cleaned = number_type.replace("-", "").replace(" ", "")
 
+    def separate_card_number(number_type_input: str) -> str:
+        match = re.search(r"(\D+)(\d+)", number_type_input)
+        if match:
+            card_type = match.group(1)
+            card_number = match.group(2)
+            return f"{card_type} {card_number}"
+        else:
+            return "Ошибка"
 
-number_type = input()
-print(mask_account_card(number_type))
+    rebuilded_number_type = separate_card_number(number_type_cleaned)
+    splited_number_type = rebuilded_number_type.split()
+    number_mask = (
+        splited_number_type[1][0:4] + " " + splited_number_type[1][4:6] + "** ****" + " " + splited_number_type[1][-4:]
+    )
+    return f"{splited_number_type[0]} {number_mask}"
 
 
 def get_date(date: str) -> str:
     """Функция принимает строку с датой и возвращает дату в другом формате"""
-    return f"{date[9:11]}.{date[6:8]}.{date[1:5]}"
-
-
-date = input()
-print(get_date(date))
+    if date == "" or "T" not in date:
+        return "Некорректный ввод"
+    return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
