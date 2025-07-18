@@ -23,21 +23,21 @@ def card_number_generator(first_number: int, second_number: int) -> Generator[st
 
 
 if __name__ == "__main__":
-    transactions_list: List[Dict[str, Any]] = []  # pragma: no cover
-    processed_transactions = int(input("Количество транзакций для обработки"))  # pragma: no cover
-    usd_transactions = filter_by_currency(transactions_list, "USD")  # pragma: no cover
-    for _ in range(processed_transactions):  # pragma: no cover
-        try:  # pragma: no cover
-            print(next(usd_transactions))  # pragma: no cover
-        except StopIteration:  # pragma: no cover
-            print("Окончание обработки")  # pragma: no cover
-            break  # pragma: no cover
+    transactions_list: List[Dict[str, Any]] = []  # Здесь должны быть твои данные транзакций
+    processed_transactions = int(input("Количество транзакций для обработки"))
+    usd_transactions = filter_by_currency(transactions_list, "USD")
+    for _ in range(processed_transactions):
+        try:
+            print(next(usd_transactions))
+        except StopIteration:
+            print("Окончание обработки")
+            break
 
-    descriptions = transaction_descriptions(transactions_list)  # pragma: no cover
-    processed_transactions_descriptions = int(input("Количество транзакций для обработки"))  # pragma: no cover
-    for _ in range(processed_transactions_descriptions):  # pragma: no cover
-        try:  # pragma: no cover
-            print(next(descriptions))  # pragma: no cover
-        except StopIteration:  # pragma: no cover
-            print("Окончание обработки")  # pragma: no cover
-            break  # pragma: no cover
+    descriptions = transaction_descriptions(transactions_list)
+    processed_transactions_descriptions = int(input("Количество транзакций для обработки"))
+    for _ in range(processed_transactions_descriptions):
+        try:
+            print(next(descriptions))
+        except StopIteration:
+            print("Окончание обработки")
+            break
