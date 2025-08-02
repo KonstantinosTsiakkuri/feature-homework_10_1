@@ -16,3 +16,6 @@ git clone (https://github.com/KonstantinosTsiakkuri/feature-homework_10_1.git)
 ## Генераторы:
 1. добавлен модуль generators с функциями-генераторами
 2. добавлен модуль тестирования test_generators с тестированием функций-генераторов
+## Декораторы:
+1. Добавлен модуль decorators
+2. Добавлено тестирование test_decorators к модулю
