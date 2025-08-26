@@ -3,7 +3,7 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 file_handler = logging.FileHandler(
-    "C:\\Users\\olasp\\Desktop\\python projects\\widget_project_2\\logs\\masks.log", mode="w", encoding="utf-8"
+    "C:\\Users\\olasp\\PythonProjects\\widget_project_2\\logs\\masks.log", mode="w", encoding="utf-8"
 )
 logger.addHandler(file_handler)
 file_formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")

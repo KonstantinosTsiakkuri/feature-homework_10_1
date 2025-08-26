@@ -19,3 +19,6 @@ git clone (https://github.com/KonstantinosTsiakkuri/feature-homework_10_1.git)
 ## Декораторы:
 1. Добавлен модуль decorators
 2. Добавлено тестирование test_decorators к модулю
+## Библиотека csv  и pandas
+1. Добавлены модули с функциями, считывающие данные из csv и excel файлов
+2. Добавлены модули с тестами для этих функций

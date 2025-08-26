@@ -4,7 +4,7 @@ from src.external_api import transaction_function
 
 
 def test_transaction_function():
-    """ Тестовая функция к функции transaction_function """
+    """Тестовая функция к функции transaction_function"""
     with patch(
         "builtins.open", mock_open(read_data='[{"operationAmount": {"amount": "100", "currency": {"name": "USD"}}}]')
     ):
