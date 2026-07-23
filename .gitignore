@@ -174,3 +174,8 @@ cython_debug/
 htmlcov/
 .coverage
 logs/
+
+# Claude Code
+task.md
+.mcp.json
+.claude/

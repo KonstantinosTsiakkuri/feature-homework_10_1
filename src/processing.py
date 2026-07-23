@@ -1,3 +1,5 @@
+import re
+from collections import Counter
 from typing import Dict, List, Union
 
 
@@ -21,6 +23,20 @@ dict_list = [
     {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
     {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
 ]
+
+
+def process_bank_search(data: list[dict], search: str) -> list[dict]:
+    """Функция принимает список словарей с транзакциями и строку поиска, возвращает список словарей,
+    в описании которых встречается данная строка (без учета регистра)"""
+    pattern = re.compile(re.escape(search), re.IGNORECASE)
+    return [transaction for transaction in data if pattern.search(transaction.get("description", ""))]
+
+
+def process_bank_operations(data: list[dict], categories: list) -> dict:
+    """Функция принимает список словарей с транзакциями и список категорий, возвращает словарь,
+    где ключи - категории, а значения - количество операций с описанием, соответствующим категории"""
+    descriptions = Counter(transaction.get("description", "") for transaction in data)
+    return {category: descriptions.get(category, 0) for category in categories}
 
 
 def sort_by_date(dict_list: list[dict], reverse: bool = True) -> list[dict]:
