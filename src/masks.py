@@ -1,10 +1,12 @@
 import logging
+from pathlib import Path
+
+LOG_DIR = Path(__file__).resolve().parent.parent / "logs"
+LOG_DIR.mkdir(exist_ok=True)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-file_handler = logging.FileHandler(
-    "C:\\Users\\olasp\\PythonProjects\\widget_project_2\\logs\\masks.log", mode="w", encoding="utf-8"
-)
+file_handler = logging.FileHandler(LOG_DIR / "masks.log", mode="w", encoding="utf-8")
 logger.addHandler(file_handler)
 file_formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
 file_handler.setFormatter(file_formatter)

@@ -17,10 +17,7 @@ def CSV_reader(path_to_CSV=os.getenv("PATH_TO_CSV")):
     return transactions
 
 
-transactions = CSV_reader()
-
-
-def CSV_to_json(transactions,path=os.getenv("PATH_TO_TRANSACTIONS_JSON")):
+def CSV_to_json(transactions, path=os.getenv("PATH_TO_TRANSACTIONS_JSON")):
     """Функция, записывающая данные из CSV-файла в формат json"""
     with open(path, "w", encoding="utf-8") as json_file:
         json.dump(transactions, json_file, ensure_ascii=False, indent=4)

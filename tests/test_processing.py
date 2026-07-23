@@ -1,6 +1,6 @@
 import pytest
 
-from src.processing import filter_by_state, sort_by_date
+from src.processing import filter_by_state, process_bank_operations, process_bank_search, sort_by_date
 
 dict_list = [
     {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
@@ -69,3 +69,35 @@ def test_filter_by_state(states, index, expected):
 )
 def test_sort_by_date(transactions, reverse, expected):
     assert sort_by_date(transactions, reverse=reverse) == expected
+
+
+@pytest.mark.parametrize(
+    "search, expected_ids",
+    [
+        ("Перевод", [939719570, 142264268, 873106923, 895315941, 594226727]),
+        ("перевод", [939719570, 142264268, 873106923, 895315941, 594226727]),
+        ("карту", [895315941]),
+        ("не существует", []),
+    ],
+)
+def test_process_bank_search(transactions_for_generators: list[dict], search: str, expected_ids: list[int]) -> None:
+    """Тестирование функции process_bank_search"""
+    result = process_bank_search(transactions_for_generators, search)
+    assert [transaction["id"] for transaction in result] == expected_ids
+
+
+def test_process_bank_operations(transactions_for_generators: list[dict]) -> None:
+    """Тестирование функции process_bank_operations"""
+    categories = [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод с карты на карту",
+        "Открытие вклада",
+    ]
+    expected = {
+        "Перевод организации": 2,
+        "Перевод со счета на счет": 2,
+        "Перевод с карты на карту": 1,
+        "Открытие вклада": 0,
+    }
+    assert process_bank_operations(transactions_for_generators, categories) == expected
